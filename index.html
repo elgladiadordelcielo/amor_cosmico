@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amor Cósmico Entre Frutas Estelares - Selector de Versión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        /* Efectos de estrellas animadas en el fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><radialGradient id="star"><stop offset="0%" stop-color="white" stop-opacity="0.9"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="30" r="1" fill="url(%23star)"/><circle cx="180" cy="50" r="0.8" fill="url(%23star)"/><circle cx="60" cy="120" r="1.2" fill="url(%23star)"/><circle cx="150" cy="160" r="0.6" fill="url(%23star)"/><circle cx="30" cy="180" r="0.9" fill="url(%23star)"/><circle cx="120" cy="20" r="0.7" fill="url(%23star)"/><circle cx="170" cy="90" r="1.1" fill="url(%23star)"/><circle cx="80" cy="170" r="0.5" fill="url(%23star)"/></svg>') repeat;
+            animation: twinkle 4s ease-in-out infinite alternate, drift 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-title {
+            color: white;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #feca57;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .version-selector {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .version-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px 25px;
+            min-width: 280px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .version-card:hover::before {
+            animation: shine 0.6s ease-in-out;
+        }
+        
+        .version-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .version-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .version-a .version-title {
+            color: #ff6b6b;
+        }
+        
+        .version-b .version-title {
+            color: #4ecdc4;
+        }
+        
+        .version-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .launch-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .version-b .launch-button {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+        
+        .launch-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .cosmic-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+        
+        .version-a .cosmic-icon {
+            animation: pulse-red 2s ease-in-out infinite alternate;
+        }
+        
+        .version-b .cosmic-icon {
+            animation: pulse-blue 2s ease-in-out infinite alternate;
+        }
+        
+        .footer {
+            position: relative;
+            z-index: 2;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-200px); }
+        }
+        
+        @keyframes shine {
+            0% { opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes pulse-red {
+            0% { filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8)); }
+        }
+        
+        @keyframes pulse-blue {
+            0% { filter: drop-shadow(0 0 10px rgba(78, 205, 196, 0.5)); }
+            100% { filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.8)); }
+        }
+        
+        @media (max-width: 768px) {
+            .version-selector {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .version-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">AMOR CÓSMICO<br>ENTRE FRUTAS ESTELARES</h1>
+        <p class="subtitle">Selecciona tu experiencia intergaláctica</p>
+        
+        <div class="version-selector">
+            <a href="AMOR_COSMICO_ENTRE_FRUTAS_ESTELARES_HTML5_HTML5_VERSIÓN_A_PLAY.html" class="version-card version-a">
+                <span class="cosmic-icon">🍎✨</span>
+                <h2 class="version-title">VERSIÓN A</h2>
+                <p class="version-description">
+                    La primera exploración cósmica de nuestras frutas estelares. 
+                    Una aventura romántica entre planetas de sabor.
+                </p>
+                <button class="launch-button">🚀 Iniciar Versión A</button>
+            </a>
+            
+            <a href="AMOR_COSMICO_ENTRE_FRUTAS_ESTELARES_HTML5_HTML5_VERSIÓN_B_PLAY.html" class="version-card version-b">
+                <span class="cosmic-icon">🍊🌟</span>
+                <h2 class="version-title">VERSIÓN B</h2>
+                <p class="version-description">
+                    Una nueva dimensión del amor cósmico. 
+                    Descubre los secretos ocultos del universo frutal.
+                </p>
+                <button class="launch-button">🚀 Iniciar Versión B</button>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>✨ Cada versión ofrece una experiencia única e inmersiva ✨</p>
+        </div>
+    </div>
+</body>
+</html>
